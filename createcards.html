@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+
+<head>
+    <link href="style.css" rel="stylesheet">
+</head>
+
+<body>
+    <main>
+        <form onsubmit="create(event)">
+            <input type="text" name="data" placeholder="data">
+            <button type="submit">Create</button>
+        </form>
+
+        <div id="capture">
+            <img src="img/gold.png">
+            <div id="snobox">
+                <p># <span id="sno">0</span></p>
+            </div>
+            <div id="picbox">
+                <img id="pic" src="img/upload.jpg">
+            </div>
+            <div id="text-content">                
+                <p id="name">
+                    Donald Ervin Knuth
+                </p>
+                <div class="desc">
+                    <img src="img/616489.png">
+                    <p class="desc-text" id="knownfor">
+                        Father of analysis of algorithm
+                    </p>
+                </div>
+                <div class="desc">
+                    <img src="img/536054.png">
+                    <p class="desc-text" id="networth">
+                        $7,000,000
+                    </p>
+                </div>
+                <div class="desc">
+                    <img src="img/job.png">
+                    <p class="desc-text" id="job">
+                        Computer Scientist, Mathematician, 
+Professor Emeritus at Stanford University
+                    </p>
+                </div>
+                <div class="desc">
+                    <img src="img/684908.png">
+                    <p class="desc-text" id="location">
+                        Milwaukee, Wisconsin, U.S.
+                    </p>
+                </div>
+            </div>
+        </div>
+        <hr>
+        <h1>Download Images</h1>
+        <!-- <button id="download">Download</button> -->
+    </main>
+    <script src="html2canvas.min.js"></script>
+    <script>
+        function create(event) {
+            event.preventDefault();
+            let data = JSON.parse(event.target[0]['value']);
+            console.log(data);
+            for (let item of data) {
+                document.getElementById('name').innerHTML = item.name;
+                document.getElementById('knownfor').innerHTML = item.knownfor;
+                document.getElementById('networth').innerHTML = item.networth;
+                document.getElementById('job').innerHTML = item.job;
+                document.getElementById('location').innerHTML = item.location;
+                document.getElementById('sno').innerHTML = item.sno;
+                document.getElementById('pic').src = "pics/" + item.sno + ".jpg";
+                document.getElementById('color').src = "img/" + item.type + ".png";
+                html2canvas(document.querySelector("#capture")).then(canvas => {
+                    // document.body.appendChild(canvas);
+                    var btn = document.createElement('button');
+                    var a = document.createElement('a');
+                    a.href = canvas.toDataURL("image/jpeg").replace("image/jpeg", "image/octet-stream");
+                    a.download = `${item.name}.jpg`;
+                    a.innerHTML = `download ${item.name}`;
+                    btn.appendChild(a);
+                    a.id = item.name;
+                    document.body.appendChild(btn);
+                    document.getElementById(item.name).click();
+                });
+            }
+        }
+
+        //document.getElementById("capture").style.display="none";
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<link rel="preconnect" href="https://fonts.gstatic.com">
+<link href="https://fonts.googleapis.com/css2?family=Dosis:wght@200;300;400;500;600;700;800&display=swap" rel="stylesheet"> 
+<head>
+    <link href="style.css" rel="stylesheet">
+</head>
+
+<body>
+    <main>
+        <form onsubmit="create(event)">
+            <input type="text" name="name" placeholder="name">
+            <input type="text" name="knownfor" placeholder="Known For">
+            <input type="text" name="networth" placeholder="Net Worth">
+            <input type="text" name="job" placeholder="Job">
+            <input type="text" name="location" placeholder="Location">
+            <input type="text" name="sno" placeholder="Number">
+            
+            <button onclick="gold()">gold</button>
+            <button onclick="silver()">silver</button>
+            <button onclick="platinum()">platinum</button>
+            <button onclick="apply()">Apply</button>
+            <button type="submit">Create</button>
+        </form>
+        
+        <div id="capture">
+            <img id="color" src="img/gold.png">
+            <div id="snobox">
+                <p># <span id="sno">1</span></p>
+            </div>
+            <div id="picbox">
+                <img id="pic" src="img/upload.jpg">
+            </div>
+            <div id="text-content">                
+                <p id="name">
+                    Donald Ervin Knuth
+                </p>
+                <div class="desc">
+                    <img src="img/616489.png">
+                    <p class="desc-text" id="knownfor">
+                        Father of analysis of algorithm
+                    </p>
+                </div>
+                <div class="desc">
+                    <img src="img/536054.png">
+                    <p class="desc-text" id="networth">
+                        $7,000,000
+                    </p>
+                </div>
+                <div class="desc">
+                    <img src="img/job.png">
+                    <p class="desc-text" id="job">
+                        Computer Scientist, Mathematician, 
+Professor Emeritus at Stanford University
+                    </p>
+                </div>
+                <div class="desc">
+                    <img src="img/684908.png">
+                    <p class="desc-text" id="location">
+                        Milwaukee, Wisconsin, U.S.
+                    </p>
+                </div>
+            </div>
+        </div>
+        <hr>
+        <h1>Download Images</h1>
+        <!-- <button id="download">Download</button> -->
+    </main>
+    <script src="html2canvas.min.js"></script>
+    <script>
+        function gold() {
+            preventDefault();
+            document.getElementById("color").src="img/gold.png";
+        }
+        function silver() {
+            document.getElementById("color").src="img/silver.png";
+        }
+        function platinum() {
+            document.getElementById("color").src="img/platinum.png";
+        }
+        function apply() {            
+            document.getElementById('name').innerHTML = document.querySelector('[name="name"]').value;
+            document.getElementById('knownfor').innerHTML = document.querySelector('[name="knownfor"]').value;
+            document.getElementById('networth').innerHTML = document.querySelector('[name="networth"]').value;
+            document.getElementById('job').innerHTML = document.querySelector('[name="job"]').value;
+            document.getElementById('location').innerHTML = document.querySelector('[name="location"]').value;
+            document.getElementById('sno').innerHTML = document.querySelector('[name="sno"]').value;
+            document.getElementById('pic').src = "pics/" + document.querySelector('[name="sno"]').value + ".jpg";
+        }
+        function create(event) {
+            event.preventDefault();
+            let name = event.target[0]['value'];
+            let knownfor = event.target[1]['value'];
+            let networth = event.target[2]['value'];
+            let job = event.target[3]['value'];
+            let location = event.target[4]['value'];
+            let sno = event.target[5]['value'];
+            document.getElementById('name').innerHTML = name;
+            document.getElementById('knownfor').innerHTML = knownfor;
+            document.getElementById('networth').innerHTML = networth;
+            document.getElementById('job').innerHTML = job;
+            document.getElementById('location').innerHTML = location;
+            document.getElementById('sno').innerHTML = sno;
+            document.getElementById('pic').src = "pics/" + sno + ".jpg"
+            setTimeout(() => {
+                html2canvas(document.querySelector("#capture")).then(canvas => {
+                    // document.body.appendChild(canvas);
+                    var btn = document.createElement('button');
+                    var a = document.createElement('a');
+                    a.href = canvas.toDataURL("image/jpeg").replace("image/jpeg", "image/octet-stream");
+                    a.download = `${name}.jpg`;
+                    a.innerHTML = `download ${name}`;
+                    btn.appendChild(a);
+                    a.id = name;
+                    document.body.appendChild(btn);
+                    document.getElementById(name).click();
+
+                });
+            }, 100);
+        }
+        //document.getElementById("capture").style.display="none";
+    </script>
+</body>
+
+</html>
