@@ -27,11 +27,12 @@
             <div id="snobox">
                 <p># <span id="sno">1</span></p>
             </div>
-            <div id="picbox">
-                <img id="pic" src="img/upload.jpg">
+            <div id="shadow">
+                <div id="picbox" style="background-image: url('img/upload.jpg');">                
+                </div>
             </div>
             <div id="text-content">                
-                <p id="name">
+                <p id="name" style="font-size: 76px;">
                     Donald Ervin Knuth
                 </p>
                 <div class="desc">
@@ -78,37 +79,26 @@ Professor Emeritus at Stanford University
             document.getElementById("color").src="img/platinum.png";
         }
         function apply() {            
+            event.preventDefault();
             document.getElementById('name').innerHTML = document.querySelector('[name="name"]').value;
             document.getElementById('knownfor').innerHTML = document.querySelector('[name="knownfor"]').value;
             document.getElementById('networth').innerHTML = document.querySelector('[name="networth"]').value;
             document.getElementById('job').innerHTML = document.querySelector('[name="job"]').value;
             document.getElementById('location').innerHTML = document.querySelector('[name="location"]').value;
             document.getElementById('sno').innerHTML = document.querySelector('[name="sno"]').value;
-            document.getElementById('pic').src = "pics/" + document.querySelector('[name="sno"]').value + ".jpg";
+            document.getElementById('picbox').style.backgroundImage = "url('pics/" + document.querySelector('[name="sno"]').value + ".jpg')";
         }
         function create(event) {
-            event.preventDefault();
-            let name = event.target[0]['value'];
-            let knownfor = event.target[1]['value'];
-            let networth = event.target[2]['value'];
-            let job = event.target[3]['value'];
-            let location = event.target[4]['value'];
-            let sno = event.target[5]['value'];
-            document.getElementById('name').innerHTML = name;
-            document.getElementById('knownfor').innerHTML = knownfor;
-            document.getElementById('networth').innerHTML = networth;
-            document.getElementById('job').innerHTML = job;
-            document.getElementById('location').innerHTML = location;
-            document.getElementById('sno').innerHTML = sno;
-            document.getElementById('pic').src = "pics/" + sno + ".jpg"
+            event.preventDefault();            
             setTimeout(() => {
+                let name = document.getElementById('name').innerHTML;
                 html2canvas(document.querySelector("#capture")).then(canvas => {
                     // document.body.appendChild(canvas);
                     var btn = document.createElement('button');
                     var a = document.createElement('a');
                     a.href = canvas.toDataURL("image/jpeg").replace("image/jpeg", "image/octet-stream");
-                    a.download = `${name}.jpg`;
-                    a.innerHTML = `download ${name}`;
+                    a.download = name + `.jpg`;
+                    a.innerHTML = `Download`+name;
                     btn.appendChild(a);
                     a.id = name;
                     document.body.appendChild(btn);

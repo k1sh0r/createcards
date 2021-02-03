@@ -12,12 +12,13 @@
         </form>
 
         <div id="capture">
-            <img src="img/gold.png">
+            <img id="color" src="img/gold.png">
             <div id="snobox">
                 <p># <span id="sno">0</span></p>
             </div>
-            <div id="picbox">
-                <img id="pic" src="img/upload.jpg">
+            <div id="shadow">
+                <div id="picbox" style="background-image: url('img/upload.jpg');">                
+                </div>
             </div>
             <div id="text-content">                
                 <p id="name">
@@ -64,11 +65,11 @@ Professor Emeritus at Stanford University
                 document.getElementById('name').innerHTML = item.name;
                 document.getElementById('knownfor').innerHTML = item.knownfor;
                 document.getElementById('networth').innerHTML = item.networth;
-                document.getElementById('job').innerHTML = item.job;
+                document.getElementById('job').innerHTML = item.Skills;
                 document.getElementById('location').innerHTML = item.location;
                 document.getElementById('sno').innerHTML = item.sno;
-                document.getElementById('pic').src = "pics/" + item.sno + ".jpg";
-                document.getElementById('color').src = "img/" + item.type + ".png";
+                document.getElementById('picbox').style.backgroundImage = "url('pics/" + item.sno + ".jpg')";
+                document.getElementById('color').src = "img/" + item.type + ".png";                
                 html2canvas(document.querySelector("#capture")).then(canvas => {
                     // document.body.appendChild(canvas);
                     var btn = document.createElement('button');

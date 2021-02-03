@@ -8,22 +8,24 @@ body {
     height: 1522px;
 }
 #picbox {
+    width: 380px;
+    height: 500px;
+    background-position: center;
+    background-size: cover;
+}
+#shadow {
     position: absolute;
     top: 272px;
     left: 359px;
     margin-left: auto;
     width: 380px;
     height: 500px;
-    overflow: hidden;
-    display: flex;
-    justify-content: center;
-    border-radius: 91.45px;
+    overflow: hidden;   
+    border-radius: 91.45px;    
     box-shadow: 0px 40px 35px 0px rgba(0,0,0,0.20);
 
 }
-#pic {
-    max-height: 500px;
-}
+
 #text-content {
     position: absolute;
     top: 813px;
